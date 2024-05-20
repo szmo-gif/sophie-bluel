@@ -185,6 +185,7 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 li:hover {
@@ -315,4 +316,100 @@ footer nav ul {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 20px;
+}
+
+/* Styles pour la page de connexion */
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+#login h2 {
+    font-family: 'Syne', sans-serif;
+    color: #004d40;
+    margin-bottom: 20px;
+}
+
+#login form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+#login label {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+#login input[type="email"],
+#login input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#login input[type="submit"] {
+    padding: 10px;
+    background-color: #004d40;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Syne', sans-serif;
+}
+
+#login input[type="submit"]:hover {
+    background-color: #00332e;
+}
+
+#login a {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    color: #004d40;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+#login a:hover {
+    text-decoration: underline;
+}
+
+/* Mise à jour des styles de navigation */
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #004d40;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+}
+
+nav ul li a.active {
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Styles pour l'image Instagram */
+nav ul li img {
+    width: 24px;
+    height: 24px;
 }

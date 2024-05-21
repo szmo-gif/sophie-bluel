@@ -1,9 +1,13 @@
-// scripts/fetch.js
-
 // Fonction pour récupérer les projets depuis le backend
+/**
+ * Fetches projects from the backend API and displays them on the frontend.
+ *
+ * @return {Promise<void>} - A promise that resolves when the projects are fetched and displayed.
+ * @throws {Error} - If there is a network error while fetching the projects.
+ */
 async function fetchProjects() {
   try {
-    const response = await fetch('http://localhost:5678/api/works'); // Assurez-vous que c'est l'URL correcte
+    const response = await fetch('http://localhost:5678/api/works');
     if (!response.ok) {
       throw new Error('Erreur réseau: ' + response.statusText);
     }
@@ -16,6 +20,12 @@ async function fetchProjects() {
 }
 
 // Fonction pour afficher les projets dans le DOM
+/**
+ * Displays projects in the project gallery.
+ *
+ * @param {Array} projects - An array of project objects.
+ * @return {void} This function does not return anything.
+ */
 function displayProjects(projects) {
   const projectGallery = document.getElementById('projects-gallery');
   projectGallery.innerHTML = ''; // Vider la galerie avant d'ajouter les nouveaux projets
@@ -36,6 +46,12 @@ function displayProjects(projects) {
 }
 
 // Fonction pour configurer les filtres
+/**
+ * Configures the filters based on the given projects.
+ *
+ * @param {Array} projects - An array of project objects.
+ * @return {void} This function does not return anything.
+ */
 function setupFilters(projects) {
   const categories = new Set(projects.map(project => project.category.name)); // Accédez à la propriété name
   const filterContainer = document.getElementById('filter-container');
@@ -44,7 +60,7 @@ function setupFilters(projects) {
   // Ajouter un bouton pour afficher tous les projets
   const allButton = document.createElement('button');
   allButton.textContent = 'Tous';
-  allButton.classList.add('filter-button', 'active'); // Ajouter une classe CSS et active par défaut
+  allButton.classList.add('filter-button', 'active');
   allButton.addEventListener('click', () => {
     displayProjects(projects);
     setActiveButton(allButton);
@@ -55,13 +71,20 @@ function setupFilters(projects) {
   categories.forEach(category => {
     const button = document.createElement('button');
     button.textContent = category;
-    button.classList.add('filter-button'); // Ajouter une classe CSS
+    button.classList.add('filter-button');
     button.addEventListener('click', () => filterProjects(category, projects));
     filterContainer.appendChild(button);
   });
 }
 
 // Fonction pour filtrer les projets
+/**
+ * Filters projects based on the given category and displays the filtered projects.
+ *
+ * @param {string} category - The category to filter the projects by.
+ * @param {Array} projects - An array of project objects.
+ * @return {void} This function does not return anything.
+ */
 function filterProjects(category, projects) {
   const filteredProjects = projects.filter(project => project.category.name === category); // Accédez à la propriété name
   displayProjects(filteredProjects);
@@ -74,6 +97,12 @@ function filterProjects(category, projects) {
 }
 
 // Fonction pour définir le bouton actif
+/**
+ * Sets the active button in a group of filter buttons.
+ *
+ * @param {HTMLElement} activeButton - The button to set as active.
+ * @return {void} This function does not return a value.
+ */
 function setActiveButton(activeButton) {
   const buttons = document.querySelectorAll('.filter-button');
   buttons.forEach(button => {

@@ -1,4 +1,4 @@
-document.getElementById('loginForm').addEventListener('submit', async function (event) {
+async function login(event) {
   event.preventDefault();
 
   const email = document.getElementById('email').value;
@@ -25,4 +25,6 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     console.error('Erreur:', error);
     document.getElementById('errorMessage').textContent = 'Une erreur est survenue. Veuillez réessayer.';
   }
-});
+};
+
+document.getElementById('loginForm').addEventListener('submit', login);

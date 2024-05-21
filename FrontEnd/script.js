@@ -1,3 +1,7 @@
+const URL = 'http://localhost:5678/api/';
+let projects = [];
+let categories = [];
+
 // Fonction pour récupérer les projets depuis le backend
 /**
  * Fetches projects from the backend API and displays them on the frontend.
@@ -7,16 +11,36 @@
  */
 async function fetchProjects() {
   try {
-    const response = await fetch('http://localhost:5678/api/works');
+    const response = await fetch(URL + 'works');
     if (!response.ok) {
       throw new Error('Erreur réseau: ' + response.statusText);
     }
-    const projects = await response.json();
+    projects = await response.json();
+
     displayProjects(projects);
     setupFilters(projects); // Ajouter cette ligne pour configurer les filtres
   } catch (error) {
     console.error('Il y a eu un problème avec votre requête fetch: ', error);
   }
+}
+
+// TODO : faire une fonction fetchCategories
+
+function displayRender() {
+  if (localStorage.getItem('token')) {
+    displayAdmin();
+  } else {
+    setupFilters(projects /*mettre categories à la place*/);
+  }
+}
+
+function displayAdmin() {
+    // TODO : afficher la bar noire d'édition + le bouton modifier + changer login en  logout 
+}
+
+function logout () {
+  localStorage.removeItem('token');
+  displayRender();
 }
 
 // Fonction pour afficher les projets dans le DOM

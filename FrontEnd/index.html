@@ -9,18 +9,23 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
 	<header>
+		<div id="admin-bar">
+			<i class="fas fa-pencil-alt"></i>
+			<p>Mode édition</p>
+		</div>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
-				<li><a href="index.html"class="active">projets</a></li>
+				<li><a href="index.html" class="active">projets</a></li>
 				<li><a href="#contact">contact</a></li>
-				<li><a href="login.html" >login</a></li>
+				<li><a href="login.html" id="login-button">login</a></li>
 				<li><a href="#"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
 			</ul>
 		</nav>
@@ -42,13 +47,18 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
-			<div id="filter-container">
+			<h2>
+				Mes Projets
+				<a href="#" id="edit-button">
+					<i class="fas fa-pencil-alt"></i> modifier
+				</a>
+			</h2>
+			<section id="filter-container">
 				<!-- Les filtres seront ajoutés ici -->
-			</div>
-			<div class="gallery" id="projects-gallery">
+			</section>
+			<section class="gallery" id="projects-gallery">
 				<!-- Les projets seront ajoutés ici -->
-			</div>
+			</section>
 		</section>
 		<section id="contact">
 			<h2>Contact</h2>
@@ -64,7 +74,6 @@
 			</form>
 		</section>
 	</main>
-
 	<footer>
 		<nav>
 			<ul>
@@ -72,6 +81,49 @@
 			</ul>
 		</nav>
 	</footer>
+
+	<!-- Modal HTML pour la gestion des projets -->
+	<div id="project-modal" class="modal">
+		<div class="modal-content">
+			<span class="close-button">&times;</span>
+			<h2>Galerie photo</h2>
+			<div class="modal-gallery">
+				<!-- Les projets à éditer seront ajoutés ici -->
+			</div>
+			<hr class="modal-separator"> <!-- Ajout de la ligne de séparation -->
+			<button id="open-add-photo-modal" class="add-photo-button">Ajouter une photo</button>
+		</div>
+	</div>
+
+	<!-- Modal HTML pour l'ajout de photos -->
+	<div id="add-photo-modal" class="modal">
+		<div class="modal-content">
+			<span class="close-button">&times;</span>
+			<h2>Ajout photo</h2>
+			<form id="add-photo-form" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="photo-upload" class="upload-label">
+						<input type="file" id="photo-upload" name="image" accept="image/*" hidden>
+						<span>+ Ajouter photo</span>
+					</label>
+					<small>jpg, png : 4mo max</small>
+				</div>
+				<div class="form-group">
+					<label for="photo-title">Titre</label>
+					<input type="text" id="photo-title" name="title" required>
+				</div>
+				<div class="form-group">
+					<label for="photo-category">Catégorie</label>
+					<select id="photo-category" name="category" required>
+						<!-- Les catégories seront ajoutées ici -->
+					</select>
+				</div>
+				<hr class="modal-separator">
+				<button type="submit" class="add-photo-button">Valider</button>
+			</form>
+		</div>
+	</div>
+
 	<script src="./script.js"></script>
 </body>
 

@@ -560,7 +560,7 @@ header {
 }
 
 /* Style pour la galerie d'images dans le modal */
-.modal-gallery figure {
+.modal-gallery li {
   display: inline-block;
   width: calc(20% - 10px);
   margin: 5px;

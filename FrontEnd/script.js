@@ -105,7 +105,7 @@ function displayProjects(projects) {
   projectGallery.innerHTML = ''; // Vider la galerie avant d'ajouter les nouveaux projets
 
   projects.forEach(project => {
-    const projectFigure = document.createElement('figure');
+    const projectFigure = document.createElement('li', 'figure');
     const projectImage = document.createElement('img');
     projectImage.src = project.imageUrl;
     projectImage.alt = project.title;
@@ -125,7 +125,7 @@ function displayProjectsInModal() {
   modalGallery.innerHTML = ''; // Vider la galerie avant d'ajouter les nouveaux projets
 
   projects.forEach(project => {
-    const projectFigure = document.createElement('figure');
+    const projectFigure = document.createElement('li', 'figure');
     const projectImage = document.createElement('img');
     projectImage.src = project.imageUrl;
     projectImage.alt = project.title;
@@ -147,7 +147,7 @@ function setupFilters(projects) {
   filterContainer.innerHTML = ''; // Vider les filtres avant d'ajouter les nouveaux
 
   // Ajouter un bouton pour afficher tous les projets
-  const allButton = document.createElement('button');
+  const allButton = document.createElement('li', 'button');
   allButton.textContent = 'Tous';
   allButton.classList.add('filter-button', 'active');
   allButton.addEventListener('click', () => {
@@ -158,7 +158,7 @@ function setupFilters(projects) {
 
   // Créer un bouton pour chaque catégorie
   categories.forEach(category => {
-    const button = document.createElement('button');
+    const button = document.createElement('li', 'button');
     button.textContent = category;
     button.classList.add('filter-button');
     button.addEventListener('click', () => filterProjects(category, projects));

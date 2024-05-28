@@ -1,8 +1,23 @@
+"use strict";
+
+// ! *********** CONSTANTS ***********
+
 const URL = 'http://localhost:5678/api/';
+
+// Écouteurs pour les boutons du modal d'ajout de photo
+const openModal = document.getElementById('open-add-photo-modal');
+const exitAddModal = document.querySelector('#add-photo-modal .close-button');
+const addPhotoForm = document.getElementById('add-photo-form');
+const exitDeleteModal = document.querySelector('#project-modal .close-button')
+
+
+// ! *********** VARIABLES ***********
+
 let projects = [];
 let categories = [];
 
-// Fonction pour récupérer les projets depuis le backend
+// ! *********** FUNCTIONS ***********
+
 /**
  * Fetches projects from the backend API and displays them on the page.
  * If the user is in visitor mode, it also sets up filters for the projects.
@@ -10,30 +25,29 @@ let categories = [];
  * @return {Promise<void>} A promise that resolves when the projects are fetched and displayed.
  * @throws {Error} If there is a network error while fetching the projects.
  */
-async function fetchProjects() {
+const fetchProjects = async () => {
   try {
     const response = await fetch(URL + 'works');
-    if (!response.ok) {
-      throw new Error('Erreur réseau: ' + response.statusText);
-    }
+    
+    if (!response.ok) throw new Error('Erreur réseau: ' + response.statusText);
+    
     projects = await response.json();
     displayProjects(projects);
-    if (!localStorage.getItem('token')) {
-      setupFilters(projects); // Configurer les filtres seulement en mode visiteur
-    }
+    
+    if (!localStorage.getItem('token')) setupFilters(projects); // Configurer les filtres seulement en mode visiteur
+
   } catch (error) {
     console.error('Il y a eu un problème avec votre requête fetch: ', error);
   }
 }
 
-// Fonction pour récupérer les catégories depuis le backend
 /**
  * Fetches categories from the backend API and populates the category select element.
  *
  * @return {Promise<void>} A promise that resolves when the categories are fetched and the select element is populated.
  * @throws {Error} If there is a network error while fetching the categories.
  */
-async function fetchCategories(){
+const fetchCategories = async () => {
   try {
     const response = await fetch(URL + 'categories');
     if (!response.ok) {
@@ -46,13 +60,12 @@ async function fetchCategories(){
   }
 }
 
-// Fonction pour peupler le sélecteur de catégories
 /**
  * Populates the category select element with options based on the categories array.
  *
  * @return {void} This function does not return a value.
  */
-const populateCategorySelect = () =>{
+const populateCategorySelect = () => {
   const categorySelect = document.getElementById('photo-category');
   categorySelect.innerHTML = ''; // Vider le sélecteur avant d'ajouter les nouvelles catégories
   categories.forEach(category => {
@@ -64,7 +77,7 @@ const populateCategorySelect = () =>{
 }
 
 // Fonction pour vérifier l'état de connexion et afficher l'interface appropriée
-const displayRender =() =>{
+const displayRender = () => {
   if (localStorage.getItem('token')) {
     displayAdmin();
   } else {
@@ -72,14 +85,13 @@ const displayRender =() =>{
   }
 }
 
-// Fonction pour afficher l'interface administrateur
 /**
  * Displays the admin interface by showing the black edit bar, changing the login button to logout,
  * displaying the edit button, displaying the projects, and hiding the filter container.
  *
  * @return {void} This function does not return anything.
  */
-const displayAdmin = () =>{
+const displayAdmin = () => {
   // Afficher la barre noire d'édition
   const adminBar = document.getElementById('admin-bar');
   if (adminBar) {
@@ -111,7 +123,6 @@ const displayAdmin = () =>{
   }
 }
 
-// Fonction pour gérer la déconnexion
 /**
  * Logs out the user by removing the token from local storage and redirecting to the home page in visitor mode.
  *
@@ -124,7 +135,6 @@ const logout = (event) => {
   window.location.href = 'index.html'; // Rediriger vers la page d'accueil en mode visiteur
 }
 
-// Fonction pour rediriger vers la page de connexion
 /**
  * Redirects the user to the login page.
  *
@@ -135,7 +145,6 @@ const redirectToLogin = () => {
   window.location.href = 'login.html';
 }
 
-// Fonction pour afficher les projets dans le DOM
 /**
  * Displays the given projects in the project gallery.
  *
@@ -161,7 +170,6 @@ const displayProjects = (projects) => {
   });
 }
 
-// Fonction pour afficher les projets dans le modal
 /**
  * Displays the projects in the modal gallery.
  *
@@ -187,7 +195,6 @@ const displayProjectsInModal = () => {
   });
 }
 
-// Fonction pour configurer les filtres
 /**
  * Sets up filters for projects based on their categories.
  *
@@ -219,7 +226,6 @@ const setupFilters = (projects) => {
   });
 }
 
-// Fonction pour filtrer les projets
 /**
  * Filters projects based on the given category and displays the filtered projects.
  *
@@ -238,7 +244,6 @@ const filterProjects = (category, projects) => {
   });
 }
 
-// Fonction pour définir le bouton actif
 /**
  * Sets the active button among a group of filter buttons.
  *
@@ -253,7 +258,6 @@ const setActiveButton = (activeButton) => {
   activeButton.classList.add('active');
 }
 
-// Fonction pour ouvrir le modal de gestion des projets
 /**
  * Opens the project modal and displays the projects in it.
  *
@@ -269,7 +273,6 @@ const openProjectModal = (event) => {
   }
 }
 
-// Fonction pour fermer le modal de gestion des projets
 /**
  * Closes the project modal by setting its display style to 'none'.
  *
@@ -283,13 +286,12 @@ const closeProjectModal = () => {
   }
 }
 
-// Fonction pour ouvrir le modal d'ajout de photo
 /**
  * Opens the add photo modal by hiding the project modal and displaying the add photo modal.
  *
  * @return {void} This function does not return anything.
  */
-const openAddPhotoModal =() => {
+const openAddPhotoModal = () => {
   const addPhotoModal = document.getElementById('add-photo-modal');
   const projectModal = document.getElementById('project-modal');
   if (addPhotoModal) {
@@ -298,7 +300,6 @@ const openAddPhotoModal =() => {
   }
 }
 
-// Fonction pour fermer le modal d'ajout de photo
 /**
  * Closes the add photo modal by hiding the modal and displaying the project modal.
  *
@@ -313,7 +314,6 @@ const closeAddPhotoModal = () => {
   }
 }
 
-// Fonction pour ajouter un projet
 /**
  * Asynchronously adds a new project to the server using the provided form data.
  *
@@ -321,7 +321,7 @@ const closeAddPhotoModal = () => {
  * @return {Promise<void>} A Promise that resolves when the project is successfully added,
  * or rejects with an error if there was a problem with the fetch request.
  */
-async function addProject(event) {
+const addProject = async (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const newProject = {
@@ -359,7 +359,7 @@ async function addProject(event) {
  * @return {Promise<void>} A Promise that resolves when the project is successfully deleted,
  * or rejects with an error if there was a problem with the fetch request.
  */
-async function deleteProject(projectId) {
+const deleteProject = async (projectId) => {
   try {
     const response = await fetch(`${URL}works/${projectId}`, {
       method: 'DELETE',
@@ -380,38 +380,37 @@ async function deleteProject(projectId) {
   }
 }
 
-// Ajouter les écouteurs d'événements
-document.addEventListener('DOMContentLoaded', async () => {
-  await fetchProjects();
-  await fetchCategories();
-  displayRender();
+const closeModal = (event) => {
+  const addPhotoModal = document.getElementById('add-photo-modal');
+  if (event.target === addPhotoModal) {
+    closeAddPhotoModal();
+  }
+}
 
-  // Écouteurs pour les boutons du modal d'ajout de photo
-  const openAddPhotoModalButton = document.getElementById('open-add-photo-modal');
-  const closeAddPhotoModalButton = document.querySelector('#add-photo-modal .close-button');
-  
-  openAddPhotoModalButton.addEventListener('click', openAddPhotoModal);
-  closeAddPhotoModalButton.addEventListener('click', closeAddPhotoModal);
-
-  window.addEventListener('click', (event) => {
-    const addPhotoModal = document.getElementById('add-photo-modal');
-    if (event.target === addPhotoModal) {
-      closeAddPhotoModal();
-    }
-  });
-
-  // Écouteur pour le formulaire d'ajout de photo
-  const addPhotoForm = document.getElementById('add-photo-form');
-  addPhotoForm.addEventListener('submit', addProject);
-});
-
-// Ajouter un écouteur d'événement pour fermer le modal principal lorsque l'utilisateur clique sur la croix
-document.querySelector('#project-modal .close-button').addEventListener('click', closeProjectModal);
-
-// Ajouter un écouteur d'événement pour fermer le modal principal lorsque l'utilisateur clique en dehors du contenu du modal
-window.addEventListener('click', (event) => {
+const closeDeleteModal = (event) => {
   const projectModal = document.getElementById('project-modal');
   if (event.target === projectModal) {
-    projectModal.style.display = 'none';
+    closeProjectModal();
   }
-});
+}
+
+const setListeners = () => {
+  openModal.addEventListener('click', openAddPhotoModal);
+  exitAddModal.addEventListener('click', closeAddPhotoModal);
+  window.addEventListener('click', closeModal);
+  addPhotoForm.addEventListener('submit', addProject);
+  // Ajouter un écouteur d'événement pour fermer le modal principal lorsque l'utilisateur clique sur la croix
+  exitDeleteModal.addEventListener('click', closeProjectModal);
+  // Ajouter un écouteur d'événement pour fermer le modal principal lorsque l'utilisateur clique en dehors du contenu du modal
+  window.addEventListener('click', closeDeleteModal);
+}
+
+// ! *********** MAIN ***********
+
+// Ajouter les écouteurs d'événements
+fetchProjects();
+fetchCategories();
+
+setListeners();
+displayRender();
+

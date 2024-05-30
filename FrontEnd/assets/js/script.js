@@ -186,7 +186,7 @@ const displayProjectsInModal = () => {
     projectImage.alt = project.title;
 
     const deleteIcon = document.createElement('i');
-    deleteIcon.classList.add('fas', 'fa-trash', 'delete-icon');
+    deleteIcon.classList.add('fa-solid', 'fa-trash-can', 'delete-icon');
     deleteIcon.addEventListener('click', () => deleteProject(project.id));
 
     projectFigure.appendChild(projectImage);

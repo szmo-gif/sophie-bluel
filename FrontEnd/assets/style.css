@@ -109,6 +109,14 @@ section {
 
 body {
   line-height: 1;
+  background-color: #FFFEF8;
+  font-family: 'Work Sans';
+  font-size: 14px;
+}
+
+main {
+  max-width: 1140px;
+  margin: auto;
 }
 
 ol,
@@ -135,17 +143,11 @@ table {
 }
 
 /** end reset css**/
-body {
-  max-width: 1140px;
-  margin: auto;
-  font-family: 'Work Sans';
-  font-size: 14px;
-}
 
 header {
   display: flex;
   justify-content: space-between;
-  margin: 50px 0
+  margin: 50px 150px 150px 150px
 }
 
 section {
@@ -188,10 +190,6 @@ nav li {
   cursor: pointer;
 }
 
-li:hover {
-  color: #B1663C;
-}
-
 #introduction {
   display: flex;
   align-items: center;
@@ -217,6 +215,7 @@ li:hover {
 
 #introduction p {
   margin-bottom: 0.5em;
+  width: 404px;
 }
 
 #portfolio h2 {
@@ -238,8 +237,10 @@ li:hover {
 }
 
 #contact {
-  width: 50%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #contact>* {
@@ -256,6 +257,7 @@ li:hover {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
+  width: 30%;
 }
 
 #contact input {
@@ -288,7 +290,8 @@ input[type="submit"] {
 footer nav ul {
   display: flex;
   justify-content: flex-end;
-  margin: 2em
+  padding: 2em;
+  background-color: white;
 }
 
 /* Style pour les boutons de filtre */
@@ -324,7 +327,6 @@ footer nav ul {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   text-align: center;
 }
 
@@ -342,6 +344,7 @@ footer nav ul {
 
 #login label {
   font-family: 'Work Sans', sans-serif;
+  display: flex;
   font-size: 14px;
   margin-bottom: 5px;
 }
@@ -350,9 +353,10 @@ footer nav ul {
 #login input[type="password"] {
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 5px;
   font-size: 14px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 #login input[type="submit"] {
@@ -360,7 +364,6 @@ footer nav ul {
   background-color: #004d40;
   color: #fff;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   font-family: 'Syne', sans-serif;
@@ -373,13 +376,17 @@ footer nav ul {
 #login a {
   font-family: 'Work Sans', sans-serif;
   font-size: 14px;
-  color: #004d40;
+  color: #3D3D3D;
   margin-top: 10px;
   text-decoration: none;
 }
 
 #login a:hover {
   text-decoration: underline;
+}
+
+#login-footer {
+  margin-top: 19rem;
 }
 
 /* Mise à jour des styles de navigation */
@@ -395,7 +402,7 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: #004d40;
+  color: black;
   font-family: 'Work Sans', sans-serif;
   font-size: 16px;
 }
@@ -421,25 +428,15 @@ nav ul li img {
   text-align: center;
   justify-content: center;
   gap: 12px;
-  padding: 10px 0;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+  padding: 20px 0;
   display: none;
 }
 
 #admin-bar p {
   margin: 0;
-  font-family: 'Syne', sans-serif;
+  font-family: 'work', sans-serif;
   font-size: 16px;
   font-weight: 400;
-}
-
-header {
-  margin-top: 100px;
-  /* Pour éviter que le header soit caché sous la barre noire */
 }
 
 /* Styles pour le modal */
@@ -456,9 +453,13 @@ header {
 }
 
 .modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
   background-color: #fefefe;
   margin: 5% auto;
-  padding: 25px;
+  padding: 50px 90px;
   border: 1px solid #888;
   width: 80%;
   max-width: 500px;
@@ -476,13 +477,20 @@ header {
   padding: 20px 0;
   color: black;
   font-size: 24px;
+  font-family: 'work', sans-serif;
+  font-weight: 400;
 }
 
 .close-button {
+  position: absolute;
+  top: 25px;
+  right: 28px;
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .close-button:hover,
@@ -502,14 +510,22 @@ header {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  border: 2px dashed #ccc;
   border-radius: 5px;
+  background-color: #E8F1F6;
   cursor: pointer;
 }
 
+.fa-image {
+  font-size: 50px;
+  color: #B9C5CC;
+}
+
 .upload-label span {
-  color: #888;
+  color: #306685;
+  background-color: #CBD6DC;
   font-size: 16px;
+  padding: 10px 33px;
+  border-radius: 50px;
 }
 
 #photo-upload {
@@ -521,8 +537,9 @@ header {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 5px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 #add-photo-form select {
@@ -538,15 +555,16 @@ header {
 }
 
 .add-photo-button {
-  margin-top: 20px;
   padding: 10px 20px;
   font-family: 'Syne', sans-serif;
   font-weight: 700;
   color: white;
   background-color: #1D6154;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
+  width: 50%;
+  margin-left: 25%;
 }
 
 .add-photo-button:hover {
@@ -578,9 +596,9 @@ header {
   top: 5px;
   right: 5px;
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: black;
   padding: 5px;
-  border-radius: 50%;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -590,9 +608,11 @@ header {
   display: none;
   display: flex;
   align-items: center;
-  font-family: 'Syne', sans-serif;
+  font-family: 'works', sans-serif;
   font-size: 14px;
-  color: #004d40;
+  font-weight: 400;
+  line-height: 16.42px;
+  color: black;
   text-decoration: none;
   margin-left: 10px; /* Espace entre le texte "Mes Projets" et le bouton "modifier" */
   display: none;
@@ -604,13 +624,13 @@ header {
 
 #edit-button:hover {
   text-decoration: underline;
-  color: #004d40;
 }
 
 #portfolio h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
   font-family: 'Syne', sans-serif;
   font-weight: 700;
   font-size: 30px;

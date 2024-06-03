@@ -150,10 +150,6 @@ header {
   margin: 50px 150px 150px 150px
 }
 
-section {
-  margin: 50px 0
-}
-
 h1 {
   display: flex;
   flex-direction: column;
@@ -193,6 +189,7 @@ nav li {
 #introduction {
   display: flex;
   align-items: center;
+  margin-bottom: 140px;
 }
 
 #introduction figure {
@@ -241,6 +238,7 @@ nav li {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 60px;
 }
 
 #contact>* {
@@ -274,6 +272,7 @@ nav li {
 #contact textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  resize: none;
 }
 
 input[type="submit"] {
@@ -481,6 +480,25 @@ nav ul li img {
   font-weight: 400;
 }
 
+.back-button {
+  position: absolute;
+  top: 25px;
+  left: 28px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.back-button:hover,
+.back-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .close-button {
   position: absolute;
   top: 25px;
@@ -500,15 +518,12 @@ nav ul li img {
   cursor: pointer;
 }
 
-.form-group {
-  margin-bottom: 20px;
-  text-align: left;
-}
 
-.upload-label {
+#upload-label {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 6px;
   padding: 20px;
   border-radius: 5px;
   background-color: #E8F1F6;
@@ -516,7 +531,7 @@ nav ul li img {
 }
 
 .fa-image {
-  font-size: 50px;
+  font-size: 80px;
   color: #B9C5CC;
 }
 
@@ -532,23 +547,30 @@ nav ul li img {
   display: none;
 }
 
+#add-photo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
 #add-photo-form input,
 #add-photo-form select {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+  padding: 15px;
   border: none;
   border-radius: 5px;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  box-sizing: border-box;
 }
 
-#add-photo-form select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-#add-photo-form input:focus,
+/* Styles pour le formulaire d'ajout de photo */
 #add-photo-form select:focus {
   border-color: #1D6154;
   outline: none;
@@ -565,17 +587,27 @@ nav ul li img {
   cursor: pointer;
   width: 50%;
   margin-left: 25%;
+  transition: background-color 0.3s;
 }
 
-.add-photo-button:hover {
-  background-color: #00332e;
+.add-photo-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
 }
+
 
 .modal-separator {
   border: none;
   border-top: 1px solid #ccc;
   margin: 20px 0; /* Ajustez les marges selon vos besoins */
 }
+
+#photo-preview {
+  display: none;
+  max-width: 30%;
+  height: auto;
+}
+
 
 /* Style pour la galerie d'images dans le modal */
 .modal-gallery li {

@@ -9,6 +9,16 @@ const openModal = document.getElementById('open-add-photo-modal');
 const exitAddModal = document.querySelector('#add-photo-modal .close-button');
 const addPhotoForm = document.getElementById('add-photo-form');
 const exitDeleteModal = document.querySelector('#project-modal .close-button')
+const backAddModal = document.querySelector('#add-photo-modal .back-button');
+const form = document.getElementById('add-photo-form');
+const submitButton = document.getElementById('submit-button');
+const inputs = form.querySelectorAll('input, select');
+const photoUpload = document.getElementById('photo-upload');
+const photoPreview = document.getElementById('photo-preview');
+const icon = document.getElementById('icon');
+const addPhotoText = document.getElementById('add-photo-text');
+const fileInfo = document.getElementById('file-info');
+const uploadLabel = document.getElementById('upload-label');
 
 
 // ! *********** VARIABLES ***********
@@ -28,12 +38,12 @@ let categories = [];
 const fetchProjects = async () => {
   try {
     const response = await fetch(URL + 'works');
-    
+
     if (!response.ok) throw new Error('Erreur réseau: ' + response.statusText);
-    
+
     projects = await response.json();
     displayProjects(projects);
-    
+
     if (!localStorage.getItem('token')) setupFilters(projects); // Configurer les filtres seulement en mode visiteur
 
   } catch (error) {
@@ -60,14 +70,13 @@ const fetchCategories = async () => {
   }
 }
 
-/**
- * Populates the category select element with options based on the categories array.
- *
- * @return {void} This function does not return a value.
- */
+
 const populateCategorySelect = () => {
   const categorySelect = document.getElementById('photo-category');
   categorySelect.innerHTML = ''; // Vider le sélecteur avant d'ajouter les nouvelles catégories
+  const noneOption = document.createElement('option');
+  noneOption.value = '';
+  categorySelect.appendChild(noneOption);
   categories.forEach(category => {
     const option = document.createElement('option');
     option.value = category.id;
@@ -310,7 +319,15 @@ const closeAddPhotoModal = () => {
   const projectModal = document.getElementById('project-modal');
   if (addPhotoModal) {
     addPhotoModal.style.display = 'none'; // Fermer le modal d'ajout de photo
-    projectModal.style.display = 'block'; // Réouvrir le modal de gestion des projets
+  }
+}
+
+const backModalProject = () => {
+  const addPhotoModal = document.getElementById('add-photo-modal');
+  const projectModal = document.getElementById('project-modal');
+  if (addPhotoModal) {
+    projectModal.style.display = 'block'; // Ouvrir le modal de gestion des projets
+    addPhotoModal.style.display = 'none'; // Fermer le modal d'ajout de photo
   }
 }
 
@@ -346,6 +363,7 @@ const addProject = async (event) => {
     projects.push(project);
     displayProjects(projects);
     closeAddPhotoModal();
+    backAddModal();
   } catch (error) {
     console.error('Il y a eu un problème avec votre requête fetch: ', error);
   }
@@ -394,6 +412,39 @@ const closeDeleteModal = (event) => {
   }
 }
 
+const checkFormValidity = () => {
+  let isValid = true;
+  inputs.forEach(input => {
+    if (!input.value) {
+      isValid = false;
+    }
+  });
+
+  submitButton.disabled = !isValid;
+};
+
+const displayPhotoPreview = () => {
+  const file = photoUpload.files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+          photoPreview.src = e.target.result;
+          photoPreview.style.display = 'block';
+          icon.style.display = 'none';
+          addPhotoText.style.display = 'none';
+          fileInfo.style.display = 'none';
+          uploadLabel.style.padding = 0;
+          
+      };
+      reader.readAsDataURL(file);
+  } else {
+      photoPreview.style.display = 'none';
+      icon.style.display = 'block';
+      addPhotoText.style.display = 'block';
+      fileInfo.style.display = 'block';
+  }
+};
+
 const setListeners = () => {
   openModal.addEventListener('click', openAddPhotoModal);
   exitAddModal.addEventListener('click', closeAddPhotoModal);
@@ -401,8 +452,16 @@ const setListeners = () => {
   addPhotoForm.addEventListener('submit', addProject);
   // Ajouter un écouteur d'événement pour fermer le modal principal lorsque l'utilisateur clique sur la croix
   exitDeleteModal.addEventListener('click', closeProjectModal);
+  backAddModal.addEventListener('click', backModalProject);
   // Ajouter un écouteur d'événement pour fermer le modal principal lorsque l'utilisateur clique en dehors du contenu du modal
   window.addEventListener('click', closeDeleteModal);
+  // Ajoute des écouteurs d'événements à tous les champs de formulaire
+  inputs.forEach(input => {
+    input.addEventListener('input', checkFormValidity);
+  });
+  // Ajoute un écouteur d'événement pour afficher la prévisualisation de la photo
+  photoUpload.addEventListener('change', displayPhotoPreview);
+
 }
 
 // ! *********** MAIN ***********
@@ -413,4 +472,7 @@ fetchCategories();
 
 setListeners();
 displayRender();
+
+// Vérifie la validité du formulaire au chargement de la page
+checkFormValidity();
 

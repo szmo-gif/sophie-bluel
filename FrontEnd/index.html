@@ -100,28 +100,28 @@
 	<div id="add-photo-modal" class="modal">
 		<section class="modal-content">
 			<span class="close-button">&times;</span>
+			<span class="fa-solid fa-arrow-left back-button"></span>
 			<h2>Ajout photo</h2>
 			<form id="add-photo-form" enctype="multipart/form-data">
-				<section class="form-group">
-					<label for="photo-upload" class="upload-label">
+					<label for="photo-upload" id="upload-label">
 						<input type="file" id="photo-upload" name="image" accept="image/*" hidden>
-						<i class="fa-regular fa-image"></i>
-						<span>+ Ajouter photo</span>
-						<small>jpg, png : 4mo max</small>
+						<i class="fa-regular fa-image" id="icon"></i>
+						<span id="add-photo-text">+ Ajouter photo</span>
+						<small id="file-info">jpg, png : 4mo max</small>
+						<img id="photo-preview" src="" alt="Prévisualisation de la photo">
 					</label>
-				</section>
 				<section class="form-group">
 					<label for="photo-title">Titre</label>
 					<input type="text" id="photo-title" name="title" required>
 				</section>
 				<section class="form-group">
 					<label for="photo-category">Catégorie</label>
-					<select id="photo-category" name="category" required>
+					<select id="photo-category" name="category">
 						<!-- Les catégories seront ajoutées ici -->
 					</select>
 				</section>
 				<hr class="modal-separator">
-				<button type="submit" class="add-photo-button">Valider</button>
+				<button type="submit" class="add-photo-button" id="submit-button">Valider</button>
 			</form>
 		</section>
 	</div>

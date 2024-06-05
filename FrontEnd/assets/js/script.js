@@ -70,21 +70,6 @@ const fetchCategories = async () => {
   }
 }
 
-
-const populateCategorySelect = () => {
-  const categorySelect = document.getElementById('photo-category');
-  categorySelect.innerHTML = ''; // Vider le sélecteur avant d'ajouter les nouvelles catégories
-  const noneOption = document.createElement('option');
-  noneOption.value = '';
-  categorySelect.appendChild(noneOption);
-  categories.forEach(category => {
-    const option = document.createElement('option');
-    option.value = category.id;
-    option.textContent = category.name;
-    categorySelect.appendChild(option);
-  });
-}
-
 // Fonction pour vérifier l'état de connexion et afficher l'interface appropriée
 const displayRender = () => {
   if (localStorage.getItem('token')) {
@@ -369,7 +354,6 @@ const addProject = async (event) => {
   }
 }
 
-// Fonction pour supprimer un projet
 /**
  * Asynchronously deletes a project from the server.
  *
@@ -410,6 +394,20 @@ const closeDeleteModal = (event) => {
   if (event.target === projectModal) {
     closeProjectModal();
   }
+}
+
+const populateCategorySelect = () => {
+  const categorySelect = document.getElementById('photo-category');
+  categorySelect.innerHTML = ''; // Vider le sélecteur avant d'ajouter les nouvelles catégories
+  const noneOption = document.createElement('option');
+  noneOption.value = '';
+  categorySelect.appendChild(noneOption);
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category.id;
+    option.textContent = category.name;
+    categorySelect.appendChild(option);
+  });
 }
 
 const checkFormValidity = () => {

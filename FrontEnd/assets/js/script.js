@@ -7,10 +7,10 @@ const URL = 'http://localhost:5678/api/';
 // Écouteurs pour les boutons du modal d'ajout de photo
 const openModal = document.getElementById('open-add-photo-modal');
 const exitAddModal = document.querySelector('#add-photo-modal .close-button');
-const addPhotoForm = document.getElementById('add-photo-form');
+const addPhotoForm = document.getElementById('add-photo-form'); //TODO DOUBLONS 
 const exitDeleteModal = document.querySelector('#project-modal .close-button')
 const backAddModal = document.querySelector('#add-photo-modal .back-button');
-const form = document.getElementById('add-photo-form');
+const form = document.getElementById('add-photo-form'); //TODO DOUBLONS 
 const submitButton = document.getElementById('submit-button');
 const inputs = form.querySelectorAll('input, select');
 const photoUpload = document.getElementById('photo-upload');

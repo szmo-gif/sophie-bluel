@@ -395,27 +395,28 @@ nav ul {
   padding: 0;
 }
 
-nav ul li {
+nav li {
   margin-right: 20px;
 }
 
-nav ul li a {
+nav a {
   text-decoration: none;
   color: black;
   font-family: 'Work Sans', sans-serif;
   font-size: 16px;
 }
 
-nav ul li a.active {
+nav li:nth-child(3) a.active {
   font-weight: bold;
 }
 
-nav ul li a:hover {
+nav a:hover,
+nav a:focus {
   text-decoration: underline;
 }
 
 /* Styles pour l'image Instagram */
-nav ul li img {
+nav img {
   width: 24px;
   height: 24px;
 }
@@ -484,7 +485,7 @@ nav ul li img {
   position: absolute;
   top: 25px;
   left: 28px;
-  color: #aaa;
+  color: black;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
@@ -494,7 +495,7 @@ nav ul li img {
 
 .back-button:hover,
 .back-button:focus {
-  color: black;
+  color: grey;
   text-decoration: none;
   cursor: pointer;
 }
@@ -503,7 +504,7 @@ nav ul li img {
   position: absolute;
   top: 25px;
   right: 28px;
-  color: #aaa;
+  color: black;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
@@ -513,7 +514,7 @@ nav ul li img {
 
 .close-button:hover,
 .close-button:focus {
-  color: black;
+  color: grey;
   text-decoration: none;
   cursor: pointer;
 }
@@ -667,4 +668,10 @@ nav ul li img {
   font-weight: 700;
   font-size: 30px;
   color: #1D6154;
+}
+
+[id="error-message"]{
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
 }
